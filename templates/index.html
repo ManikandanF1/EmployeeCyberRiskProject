@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Cyber Risk Monitoring</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>Employee Cyber Risk Awareness Dashboard</h1>
+<p>Monitoring suspicious file activity</p>
+
+<table>
+<tr>
+    <th>File Name</th>
+    <th>Size (Bytes)</th>
+    <th>Last Modified</th>
+</tr>
+
+{% for file, size, modified in files %}
+<tr>
+    <td>{{ file }}</td>
+    <td>{{ size }}</td>
+    <td>{{ modified }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>

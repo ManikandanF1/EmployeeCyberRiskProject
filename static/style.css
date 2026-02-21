@@ -1,0 +1,17 @@
+body {
+    font-family: Arial;
+    background-color: black;
+    color: lime;
+    text-align: center;
+}
+
+table {
+    margin: auto;
+    border-collapse: collapse;
+    width: 60%;
+}
+
+th, td {
+    border: 1px solid lime;
+    padding: 8px;
+}
