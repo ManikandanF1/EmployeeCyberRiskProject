@@ -17,5 +17,5 @@ It detects file changes, modification timestamps, and file sizes to identify sus
 
 ## How to Run
 ```bash
-pip install flask
+pip install -r requirements.txt
 python app.py
