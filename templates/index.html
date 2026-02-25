@@ -1,30 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Employee Cyber Risk Monitoring</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Cyber Risk Monitoring Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-shield-alt"></i> Employee Cyber Risk Monitoring</h1>
+            <p>Real-time Security Operations Center Dashboard</p>
+        </div>
+    </header>
 
-<h1>Employee Cyber Risk Awareness Dashboard</h1>
-<p>Monitoring suspicious file activity</p>
+    <div class="container">
+        <div class="dashboard-grid">
+            <!-- Statistics Cards -->
+            <div class="card">
+                <h3><i class="fas fa-file"></i> File Statistics</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">{{ files|length }}</span>
+                        <span class="stat-label">Total Files</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number risk-high">{{ suspicious_count or 0 }}</span>
+                        <span class="stat-label">High Risk</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number risk-medium">{{ medium_risk_count or 0 }}</span>
+                        <span class="stat-label">Medium Risk</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number risk-low">{{ low_risk_count or 0 }}</span>
+                        <span class="stat-label">Low Risk</span>
+                    </div>
+                </div>
+            </div>
 
-<table>
-<tr>
-    <th>File Name</th>
-    <th>Size (Bytes)</th>
-    <th>Last Modified</th>
-</tr>
+            <!-- System Status -->
+            <div class="card">
+                <h3><i class="fas fa-server"></i> System Status</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number"><i class="fas fa-circle" style="color: var(--success-color);"></i></span>
+                        <span class="stat-label">Monitoring Active</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ last_scan or 'N/A' }}</span>
+                        <span class="stat-label">Last Scan</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-{% for file, size, modified in files %}
-<tr>
-    <td>{{ file }}</td>
-    <td>{{ size }}</td>
-    <td>{{ modified }}</td>
-</tr>
-{% endfor %}
+        <!-- File Monitoring Table -->
+        <div class="card">
+            <h3><i class="fas fa-folder-open"></i> File Activity Monitor</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>File Name</th>
+                        <th>Size</th>
+                        <th>Last Modified</th>
+                        <th>Risk Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for file, size, modified, risk in files %}
+                    <tr>
+                        <td class="file-name"><i class="fas fa-file"></i> {{ file }}</td>
+                        <td class="file-size">{{ size }} bytes</td>
+                        <td class="file-modified">{{ modified }}</td>
+                        <td>
+                            <span class="risk-badge {{ risk }}">
+                                {% if risk == 'high' %}
+                                    <i class="fas fa-exclamation-triangle"></i> High
+                                {% elif risk == 'medium' %}
+                                    <i class="fas fa-exclamation-circle"></i> Medium
+                                {% else %}
+                                    <i class="fas fa-check-circle"></i> Low
+                                {% endif %}
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-</table>
-
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Employee Cyber Risk Monitoring Platform. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>

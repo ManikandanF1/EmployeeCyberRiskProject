@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  cyber-risk-monitor:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=True
+      - SECRET_KEY=interview-demo-key
+      - WATCH_FOLDER=/app
+      - APP_NAME=Employee Cyber Risk Monitor
+      - APP_VERSION=2.0.0
+    volumes:
+      - .:/app
+      - ./cyber_monitor.log:/app/cyber_monitor.log
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
