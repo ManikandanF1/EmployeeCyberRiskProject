@@ -197,7 +197,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙋 Support
 
-For support, email support@company.com or create an issue in this repository.
+For support, g.manikandan6381@gmail.com or create an issue in this repository.
 
 ## 🚀 Future Enhancements
 
